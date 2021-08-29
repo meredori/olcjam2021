@@ -1,16 +1,12 @@
 import React from 'react'
-import WordAnimate from './animations/word-animate'
+import Introduction from './scenes/introduction';
 
 class Scene extends React.Component {
     render() {
         return <div className="container">
         <div className="row">
-          <div className="col">
-          </div>
-          <div className="col">
-            <WordAnimate word="Wake up..." />
-          </div>
-          <div className="col">
+          <div className="col justify-content-center">
+            <Introduction />
           </div>
         </div>
       </div>
