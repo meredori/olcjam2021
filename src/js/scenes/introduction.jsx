@@ -14,7 +14,12 @@ class Introduction extends React.Component {
         }
     }
     render() {
-        return <WordAnimate word={data[this.props.currentWord]} />     
+        const words = data.slice(0,this.props.currentWord+1).map((item,index) =>
+        (
+            <><WordAnimate key={index} word={item} /><br /></>
+        )
+        );
+        return <div>{words}</div>   
     }   
 
 }

@@ -6,12 +6,17 @@ class Scene extends React.Component {
   constructor(props){
     super(props);
   }
-  state = { textTimeout: 0, currWord: 0, reactActive: true, thinkActive: false, timer: false }
+  state = { textTimeout: 0, currWord: 0, reactActive: false, thinkActive: false, timer: false }
   textTimeout = (value) => {
       this.setState({textTimeout: value});
   }
   reactClick = () => {
-    this.setState((prevState) => ({currWord: prevState.currWord+1}));
+    if(this.state.reactActive){
+      this.setState((prevState) => ({currWord: prevState.currWord+1}));
+    }
+    else {
+      this.setState({reactActive:true});
+    }
   }
   thinkClick = () => {
     this.setState((prevState) => ({currWord: prevState.currWord+1}));
@@ -19,20 +24,24 @@ class Scene extends React.Component {
 
 
   render() {
+    let introduction;
+    if(this.state.reactActive){
+      introduction = <Introduction currentWord={this.state.currWord} onTextRender={this.textTimeout} />
+    }
     return (
       <div className="container">
         <div className="row">
-          <div className="col justify-content-center">
-            <div className="text-secondary">
-            <Introduction currentWord={this.state.currWord} onTextRender={this.textTimeout} />
-            </div>
+          <div className="col justify-content-center">            
+            <ActionButtons reactClick={this.reactClick} thinkClick={this.thinkClick} thinkActive={this.state.thinkActive} />
           </div>
         </div>
         <div className="row">
-          <div className="col justify-content-center">            
-            <ActionButtons reactClick={this.reactClick} thinkClick={this.thinkClick} reactActive={this.state.reactActive} thinkActive={this.state.thinkActive} />
+          <div className="col justify-content-center">
+            <div className="text-secondary">              
+              {introduction}
+            </div>
           </div>
-        </div>
+        </div>     
       </div>
     );
   }

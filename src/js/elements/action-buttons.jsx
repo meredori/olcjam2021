@@ -10,15 +10,11 @@ class ActionButtons extends React.Component {
         this.props.thinkClick();
     }
     render() {
-        let reactButton;
         let thinkButton;
-        if (this.props.reactActive){
-            reactButton = <ReactButton onClick={this.reactClick} />
-        }
         if (this.props.thinkActive){
             thinkButton += <ThinkButton onClick={this.thinkClick} />
         }
-        return <div>{reactButton}{thinkButton}</div>
+        return <div><ReactButton onClick={this.reactClick} />{thinkButton}</div>
     }   
 
 }
