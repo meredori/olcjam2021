@@ -1,12 +1,26 @@
 import React from 'react';
 import LetterAnimate from './letter-animate.jsx';
+import anime from 'animejs';
 
 class WordAnimate extends React.Component {
+    componentDidMount(){
+        anime.timeline()
+  .add({
+    targets: '.word' + this.props.id + ' .letter',
+    opacity: [0,1],
+    easing: "easeInOutQuad",
+    duration: 2250,
+    delay: (el, i) => 150 * (i+1)
+  })    
+    }
     render() {
         const letters = [...this.props.word];
-        return letters.map((letter, index) => 
+        var splitLetters = letters.map((letter, index) => 
         <LetterAnimate key={index} letter={letter} delay={index} />
         );
+        return <div className={'word' + this.props.id}>
+            {splitLetters}
+        </div>
     }
 }
 

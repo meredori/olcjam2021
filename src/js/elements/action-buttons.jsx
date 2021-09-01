@@ -1,6 +1,5 @@
 import React from 'react'
-import ReactButton from './react-button';
-import ThinkButton from './think-button';
+import CommonButton from './common-button';
 
 class ActionButtons extends React.Component {
     reactClick = () => {
@@ -12,9 +11,9 @@ class ActionButtons extends React.Component {
     render() {
         let thinkButton;
         if (this.props.thinkActive){
-            thinkButton += <ThinkButton onClick={this.thinkClick} />
+            thinkButton = <CommonButton label={this.props.thinkLabel} active={this.props.thinkActive} onClick={this.thinkClick} />
         }
-        return <div><ReactButton onClick={this.reactClick} />{thinkButton}</div>
+        return <div><CommonButton onClick={this.reactClick} active={this.props.reactActive} label='React' />{thinkButton}</div>
     }   
 
 }

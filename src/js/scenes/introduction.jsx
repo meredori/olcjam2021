@@ -5,18 +5,13 @@ class Introduction extends React.Component {
     constructor(props){
         super(props);
         var timeout = data[this.props.currentWord].length * 150;
-        this.props.onTextRender(timeout);
-    }
-    componentDidUpdate(prevProps){
-        if(prevProps.currentWord != this.props.currentWord){
-            var timeout = data[this.props.currentWord].length * 150;
-            this.props.onTextRender(timeout);
-        }
+        this.props.dataLength(data.length);
     }
     render() {
         const words = data.slice(0,this.props.currentWord+1).map((item,index) =>
         (
-            <><WordAnimate key={index} word={item} /><br /></>
+            <div key={index}><WordAnimate id={index} word={item} /><br/></div>
+            
         )
         );
         return <div>{words}</div>   
