@@ -7,10 +7,23 @@ class Introduction extends React.Component {
         var timeout = data[this.props.currentWord].length * 150;
         this.props.dataLength(data.length);
     }
+    state = {hidden:[]}
+    componentDidMount(){
+        var array = [];
+        data.forEach(element => {
+            array.push(false);
+        });
+        this.setState({hidden:array});
+    }
+    hideWord = (index) => {
+        let items = [...this.state.hidden];
+        items[index] = true;
+        this.setState({hidden: items});
+    }
     render() {
         const words = data.slice(0,this.props.currentWord+1).map((item,index) =>
         (
-            <div key={index}><WordAnimate id={index} word={item} /><br/></div>
+            this.state.hidden[index] ? null : <div key={index}><WordAnimate id={index} word={item} hideMe={this.hideWord} /><br/></div>
             
         )
         );
